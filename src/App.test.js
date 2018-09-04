@@ -8,10 +8,17 @@ describe('App test', () => {
 		const div = document.createElement('div');
 		ReactDOM.render(<App />, div);
 		ReactDOM.unmountComponentAtNode(div);
-	});	
+	});
 
 	it('renders properly', () => {
-		const tree = renderer.create(<App />).toJSON();
+		const tree = renderer.create(<App />, {
+			createNodeMock: element => {
+				if (element.type === 'input') {
+					return { focus: () => { } };
+				}
+				return null;
+			}
+		}).toJSON();
 		expect(tree).toMatchSnapshot();
-	});	
+	});
 });
