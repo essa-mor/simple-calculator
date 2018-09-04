@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+
+import ResultPanel from './components/ResultPanel';
 import './App.css';
 
-const initialState = { result: 0, operator: '' };
+const initialState = { prevResult: 0, result: 0, operator: '', summary: '' };
 
 class App extends Component {
 	constructor(props) {
@@ -11,7 +13,7 @@ class App extends Component {
 		this.onClearClick = this.onClearClick.bind(this);
 		this.onKeyPress = this.onKeyPress.bind(this);
 		this.onOperatorClick = this.onOperatorClick.bind(this);
-		this.textInput = React.createRef();
+		this.onEqualClick = this.onEqualClick.bind(this);
 	}
 
 	onClearClick() {
@@ -24,31 +26,52 @@ class App extends Component {
 	}
 
 	addDigit(value) {
-		this.setState(prevState => ({
-			result: prevState.result * 10 + parseInt(value)
-		}));
+		this.setState(prevState => {
+			const result = prevState.operator !== '' ? 0 : prevState.result;
+			return {
+				result: result * 10 + parseInt(value)
+			};
+		});
 	}
 
 	onKeyPress(e) {
 		if (e.key >= 0 && e.key <= 9) {
 			this.addDigit(e.key);
+		} else if (['-', '+', '/', '*'].includes(e.key)) {
+			this.setOperator(e.key);
+		} else if (e.key === '=' /*|| e.key === 'Enter'*/) {
+			this.setResult();
 		}
 	}
 
-	onOperatorClick(e){
+	onOperatorClick(e) {
 		const { value } = e.target;
-		this.setState({operator: value});
+		this.setOperator(value);
 	}
 
-	componentDidMount() {
-		this.textInput.current.focus();
+	setOperator(operator) {
+		this.setState(prevState => ({
+			operator,
+			summary: `${prevState.summary} ${prevState.result} ${operator}`,
+			prevResult: prevState.result
+		}));
+	}
+
+	onEqualClick() {
+		this.setResult();
+	}
+
+	setResult() {
+		this.setState(prevState => ({
+			...initialState, result: eval(`${prevState.prevResult}  ${prevState.operator}  ${prevState.result}`)
+		}));
 	}
 
 	render() {
-		const { result , operator} = this.state;
+		const { result, summary } = this.state;
 		return (
 			<div className="App" onKeyPress={this.onKeyPress}>
-				<input type="text" ref={this.textInput} value={result + ` ${operator}`} className="result_input" readOnly />
+				<ResultPanel className="result" summary={summary} result={result}/>
 				<button type="button" onClick={this.onClearClick} className="clear_result">Clear</button>
 				<button type="button" value="-" onClick={this.onOperatorClick} className="operator">-</button>
 				<button type="button" value="7" onClick={this.onDigitClick} className="digit">7</button>
@@ -65,7 +88,7 @@ class App extends Component {
 				<button type="button" value="+" onClick={this.onOperatorClick} className="operator">+</button>
 				<button type="button" value="0" onClick={this.onDigitClick} className="digit">0</button>
 				<button type="button" className="digit">.</button>
-				<button type="button" className="equal">=</button>
+				<button type="button" onClick={this.onEqualClick} className="equal">=</button>
 			</div>
 		);
 	}

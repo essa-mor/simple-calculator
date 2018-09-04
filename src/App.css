@@ -8,15 +8,9 @@
   width: 164px;
 }
 
-.result_input{
+.result{
   grid-column-start: 1;
   grid-column-end: 5;
-  text-align: right;
-  background-color: rgb(67, 52, 55);
-  color: white;
-  border: none;
-  height: 42px;
-  padding-right: 5px;
 }
 
 .digit, .clear_result{

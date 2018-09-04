@@ -5,12 +5,21 @@ exports[`App test renders properly 1`] = `
   className="App"
   onKeyPress={[Function]}
 >
-  <input
-    className="result_input"
-    readOnly={true}
-    type="text"
-    value="0 "
-  />
+  <div
+    className="result"
+  >
+    <span
+      className="result_label"
+    >
+      
+    </span>
+    <input
+      className="result_input"
+      readOnly={true}
+      type="text"
+      value={0}
+    />
+  </div>
   <button
     className="clear_result"
     onClick={[Function]}
@@ -138,6 +147,7 @@ exports[`App test renders properly 1`] = `
   </button>
   <button
     className="equal"
+    onClick={[Function]}
     type="button"
   >
     =
