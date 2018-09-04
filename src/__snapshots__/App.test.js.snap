@@ -3,100 +3,130 @@
 exports[`App test renders properly 1`] = `
 <div
   className="App"
+  onKeyPress={[Function]}
 >
   <input
     className="result_input"
     readOnly={true}
     type="text"
-    value="0"
+    value="0 "
   />
   <button
     className="clear_result"
+    onClick={[Function]}
     type="button"
   >
     Clear
   </button>
   <button
     className="operator"
+    onClick={[Function]}
     type="button"
+    value="-"
   >
     -
   </button>
   <button
     className="digit"
+    onClick={[Function]}
     type="button"
+    value="7"
   >
     7
   </button>
   <button
     className="digit"
+    onClick={[Function]}
     type="button"
+    value="8"
   >
     8
   </button>
   <button
     className="digit"
+    onClick={[Function]}
     type="button"
+    value="9"
   >
     9
   </button>
   <button
     className="operator"
+    onClick={[Function]}
     type="button"
+    value="/"
   >
     /
   </button>
   <button
     className="digit"
+    onClick={[Function]}
     type="button"
+    value="4"
   >
     4
   </button>
   <button
     className="digit"
+    onClick={[Function]}
     type="button"
+    value="5"
   >
     5
   </button>
   <button
     className="digit"
+    onClick={[Function]}
     type="button"
+    value="6"
   >
     6
   </button>
   <button
     className="operator"
+    onClick={[Function]}
     type="button"
+    value="*"
   >
     *
   </button>
   <button
     className="digit"
+    onClick={[Function]}
     type="button"
+    value="1"
   >
     1
   </button>
   <button
     className="digit"
+    onClick={[Function]}
     type="button"
+    value="2"
   >
     2
   </button>
   <button
     className="digit"
+    onClick={[Function]}
     type="button"
+    value="3"
   >
     3
   </button>
   <button
     className="operator"
+    onClick={[Function]}
     type="button"
+    value="+"
   >
     +
   </button>
   <button
     className="digit"
+    onClick={[Function]}
     type="button"
+    value="0"
   >
     0
   </button>
