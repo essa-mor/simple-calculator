@@ -24,7 +24,7 @@ class ResultPanel extends PureComponent {
 
 ResultPanel.propTypes = {
 	summary: PropTypes.string, 
-	result: PropTypes.number, 
+	result: PropTypes.string, 
 	className: PropTypes.string
 };
 
