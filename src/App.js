@@ -87,7 +87,25 @@ class App extends Component {
 	}
 
 	getCalculatedResult(prevState) {
-		return eval(`${prevState.prevDisplayedNumber}  ${prevState.operator}  ${prevState.displayedNumber}`).toString();
+		let result = 0;
+		const { prevDisplayedNumber, operator, displayedNumber } = prevState;
+		switch(operator){
+			case '-' : 
+				result =  Number(prevDisplayedNumber) - Number(displayedNumber);
+				break;
+			case '+' : 
+				result =  Number(prevDisplayedNumber) + Number(displayedNumber);
+				break;
+			case '/' : 
+				result =  Number(prevDisplayedNumber) / Number(displayedNumber);
+				break;
+			case '*' : 
+				result =  Number(prevDisplayedNumber) * Number(displayedNumber);
+				break;
+			default:
+				break;
+		}
+		return result.toString();
 	}
 
 	setFraction() {
