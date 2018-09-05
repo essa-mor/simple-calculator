@@ -5,7 +5,7 @@ import CalculatorButton from './components/CalculatorButton';
 
 import './App.css';
 
-const initialState = { prevDisplayedNumber: '0', currResult: '0', displayedNumber: '0', operator: '', summary: '' };
+const initialState = { prevDisplayedNumber: '0', override: true, displayedNumber: '0', operator: '', summary: '' };
 const fraction_symbol = '.';
 
 class App extends Component {
@@ -32,12 +32,8 @@ class App extends Component {
 
 	addDigit(value) {
 		this.setState(prevState => {
-			const { displayedNumber } = prevState;
-			if (displayedNumber == 0) {
-				return { displayedNumber: value };
-			}
-			const prevDisplayedNumber = prevState.operator !== '' ? '' : prevState.displayedNumber;
-			return { displayedNumber: `${prevDisplayedNumber}${value}` };
+			const prevDisplayedNumber = prevState.override ? '' : prevState.displayedNumber;
+			return { displayedNumber: `${prevDisplayedNumber}${value}`, override: false };
 		});
 	}
 
@@ -50,7 +46,7 @@ class App extends Component {
 			this.setResult();
 		} else if (e.key === fraction_symbol) {
 			this.setFraction();
-		}else if(e.key === 'Backspace'){
+		} else if (e.key === 'Backspace') {
 			this.doBackspace();
 		}
 	}
@@ -63,27 +59,28 @@ class App extends Component {
 	setOperator(operator) {
 		this.setState(prevState => {
 			const prevOperator = prevState.operator;
-			let { prevDisplayedNumber , displayedNumber }= prevState;
-			if(prevOperator !== ''){
+			let { prevDisplayedNumber, displayedNumber } = prevState;
+			if (prevOperator !== '') {
 				const newResult = this.getCalculatedResult(prevState);
-				prevDisplayedNumber= newResult;
-				displayedNumber= newResult;
-			}else{
-				prevDisplayedNumber= displayedNumber;
+				prevDisplayedNumber = newResult;
+				displayedNumber = newResult;
+			} else {
+				prevDisplayedNumber = displayedNumber;
 			}
 
 			return {
 				operator,
 				summary: `${prevState.summary} ${prevState.displayedNumber} ${operator}`,
 				displayedNumber,
-				prevDisplayedNumber
+				prevDisplayedNumber,
+				override: true
 			};
 		});
 	}
 
 	setResult() {
 		const { operator } = this.state;
-		if(operator === '') return;
+		if (operator === '') return;
 		this.setState(prevState => ({
 			...initialState, displayedNumber: this.getCalculatedResult(prevState)
 		}));
@@ -107,13 +104,13 @@ class App extends Component {
 		this.setState(prevState => {
 			const { displayedNumber } = prevState;
 			if (displayedNumber === '0' || displayedNumber.length === 1) {
-				return { displayedNumber: '0'};
+				return { displayedNumber: '0', override: true };
 			}
 			return { displayedNumber: displayedNumber.substring(0, displayedNumber.length - 1) };
 		});
 	}
 
-	componentDidMount(){
+	componentDidMount() {
 		document.addEventListener('keydown', this.onKeyDown);
 	}
 
