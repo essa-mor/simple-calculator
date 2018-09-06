@@ -2,11 +2,18 @@ import React, { Component } from 'react';
 
 import ResultPanel from './components/ResultPanel';
 import CalculatorButton from './components/CalculatorButton';
+import {
+	initialState,
+	fraction_symbol,
+	addDigitReducer,
+	setOperatorReducer,
+	setResultReducer,
+	setFractionReducer,
+	doBackspaceReducer
+} from './CalculatorReducer';
 
 import './App.css';
 
-const initialState = { prevDisplayedNumber: '0', override: true, displayedNumber: '0', operator: '', summary: '' };
-const fraction_symbol = '.';
 
 class App extends Component {
 	constructor(props) {
@@ -31,10 +38,7 @@ class App extends Component {
 	}
 
 	addDigit(value) {
-		this.setState(prevState => {
-			const prevDisplayedNumber = prevState.override ? '' : prevState.displayedNumber;
-			return { displayedNumber: `${prevDisplayedNumber}${value}`, override: false };
-		});
+		this.setState(prevState => addDigitReducer(prevState, value));
 	}
 
 	onKeyDown(e) {
@@ -57,75 +61,20 @@ class App extends Component {
 	}
 
 	setOperator(operator) {
-		this.setState(prevState => {
-			const prevOperator = prevState.operator;
-			let { prevDisplayedNumber, displayedNumber } = prevState;
-			if (prevOperator !== '') {
-				const newResult = this.getCalculatedResult(prevState);
-				prevDisplayedNumber = newResult;
-				displayedNumber = newResult;
-			} else {
-				prevDisplayedNumber = displayedNumber;
-			}
-
-			return {
-				operator,
-				summary: `${prevState.summary} ${prevState.displayedNumber} ${operator}`,
-				displayedNumber,
-				prevDisplayedNumber,
-				override: true
-			};
-		});
+		this.setState(prevState => setOperatorReducer(prevState, operator));
 	}
 
 	setResult() {
 		const { operator } = this.state;
-		if (operator === '') return;
-		this.setState(prevState => ({
-			...initialState, displayedNumber: this.getCalculatedResult(prevState)
-		}));
-	}
-
-	getCalculatedResult(prevState) {
-		let result = 0;
-		const { prevDisplayedNumber, operator, displayedNumber } = prevState;
-		switch(operator){
-			case '-' : 
-				result =  Number(prevDisplayedNumber) - Number(displayedNumber);
-				break;
-			case '+' : 
-				result =  Number(prevDisplayedNumber) + Number(displayedNumber);
-				break;
-			case '/' : 
-				result =  Number(prevDisplayedNumber) / Number(displayedNumber);
-				break;
-			case '*' : 
-				result =  Number(prevDisplayedNumber) * Number(displayedNumber);
-				break;
-			default:
-				break;
-		}
-		return result.toString();
+		this.setState(prevState => setResultReducer(prevState, operator));
 	}
 
 	setFraction() {
-		this.setState(prevState => {
-			const { displayedNumber } = prevState;
-			if (!displayedNumber.includes(fraction_symbol)) {
-				return { displayedNumber: `${displayedNumber}${fraction_symbol}` };
-			}
-			return { displayedNumber };
-		});
+		this.setState(prevState => setFractionReducer(prevState));
 	}
 
 	doBackspace() {
-		this.setState(prevState => {
-			const { displayedNumber } = prevState;
-			if (displayedNumber === '0' || displayedNumber.length === 1) {
-				return { displayedNumber: '0', override: true };
-			}
-			return { displayedNumber: displayedNumber.substring(0, displayedNumber.length - 1) };
-		});
+		this.setState(prevState => doBackspaceReducer(prevState));
 	}
 
 	componentDidMount() {
