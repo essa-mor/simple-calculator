@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import disableFocus from './DisableFocus';
+import withDisableFocus from './WithDisableFocus';
 
 export function CalculatorButton({value , onClick, onFocus, className}){
 	return <button type="button" value={value} onClick={onClick} onFocus={onFocus} className={className}>{value}</button>;
@@ -14,4 +14,4 @@ CalculatorButton.propTypes = {
 	onFocus: PropTypes.func
 };
 
-export default disableFocus(CalculatorButton);
+export default withDisableFocus(CalculatorButton);
