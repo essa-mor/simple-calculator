@@ -4,10 +4,10 @@ function disable(e){
 	e.target.blur();
 }
 
-function disableFocus(Component) {
+function withDisableFocus(Component) {
 	return function(props){
 		return <Component {...props} onFocus={disable}/>;
 	};
 }
 
-export default disableFocus;
+export default withDisableFocus;
