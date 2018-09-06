@@ -7,11 +7,15 @@ exports[`App test renders properly 1`] = `
   <div
     className="result"
   >
-    <span
-      className="result_label"
+    <div
+      className="box  ellipsis  reverse-ellipsis"
     >
-      
-    </span>
+      <span
+        className="result_label"
+      >
+        
+      </span>
+    </div>
     <input
       className="result_input"
       readOnly={true}

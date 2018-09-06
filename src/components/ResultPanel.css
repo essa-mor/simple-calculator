@@ -1,24 +1,72 @@
 .result_label{
-	height: 16px;
-	color: white;
-	text-align: right;
-	display: block;
+	text-align:  right;
+	height: 15px;
+}
+
+.box {
+	width: 164px;
+	box-sizing: border-box;
+	padding: 5px 0.4em 0 1em;
+	/* margin: 1em 0;   */
 	font-family: Arial;
 	font-size: 13px;
-	background-color: rgb(67, 52, 55);
-	padding-top: 5px;
-	padding-right: 8px;
-  }
+}
   
-  .result_input{
+.ellipsis {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.reverse-ellipsis {
+	/* Your move. */
+	text-overflow: clip;
+	position: relative;
+	background-color: rgb(67, 52, 55);
+	color: white;
+}
+
+.reverse-ellipsis:before {
+	content: '\02026';
+	position: absolute;
+	z-index: 1;
+	left: -1em;
+	background-color: inherit;
+	padding-left: 1em;
+	margin-left: 0.5em;
+}
+
+.reverse-ellipsis span {
+	min-width: 100%;
+	position: relative;
+	display: inline-block;
+	float: right;
+	overflow: visible;
+	background-color: inherit;
+	text-indent: 0.5em;
+}
+  
+.reverse-ellipsis span:before {
+	content: '';
+	position: absolute;
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	background-color: inherit;
+	z-index: 200;
+	left: -.5em;
+}  
+  
+.result_input{
 	text-align: right;
 	background-color: rgb(67, 52, 55);
 	color: white;
 	border: none;
 	height: 25px;
-	width: 159px;
+	width: 164px;
+	box-sizing: border-box;
 	padding-right: 5px;
 	font-weight: bold;
-  }
+}
   
   

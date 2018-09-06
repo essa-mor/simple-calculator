@@ -16,7 +16,7 @@ class ResultPanel extends PureComponent {
 	render() {
 		const { summary, result, className } = this.props;
 		return (<div className={className}>
-			<span className="result_label">{summary}</span>
+			<div className="box  ellipsis  reverse-ellipsis"><span className="result_label">{summary}</span></div>
 			<input type="text" ref={this.textInput} value={result} className="result_input" readOnly />
 		</div>);
 	}
