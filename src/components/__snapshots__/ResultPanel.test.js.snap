@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResultPanel test Renders properly - can't devide by zero 1`] = `
+<div
+  className="mycalss"
+>
+  <div
+    className="box  ellipsis  reverse-ellipsis"
+  >
+    <span
+      className="result_label"
+    >
+      1 +
+    </span>
+  </div>
+  <input
+    className="result_input"
+    readOnly={true}
+    type="text"
+    value="Can't devide by zero"
+  />
+</div>
+`;
+
+exports[`ResultPanel test Renders properly 1`] = `
+<div
+  className="mycalss"
+>
+  <div
+    className="box  ellipsis  reverse-ellipsis"
+  >
+    <span
+      className="result_label"
+    >
+      1 +
+    </span>
+  </div>
+  <input
+    className="result_input"
+    readOnly={true}
+    type="text"
+    value="1"
+  />
+</div>
+`;
