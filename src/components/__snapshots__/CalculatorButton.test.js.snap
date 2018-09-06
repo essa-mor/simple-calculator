@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CalculatorButton test Renders properly 1`] = `
+<button
+  className="myclass"
+  onClick={undefined}
+  onFocus={undefined}
+  type="button"
+  value="1"
+>
+  1
+</button>
+`;

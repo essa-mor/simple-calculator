@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import disableFocus from './DisableFocus';
 
-function CalculatorButton({value , onClick, onFocus, className}){
+export function CalculatorButton({value , onClick, onFocus, className}){
 	return <button type="button" value={value} onClick={onClick} onFocus={onFocus} className={className}>{value}</button>;
 }
 
