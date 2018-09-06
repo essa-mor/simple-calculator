@@ -17,7 +17,7 @@ class ResultPanel extends PureComponent {
 		const { summary, result, className } = this.props;
 		return (<div className={className}>
 			<div className="box  ellipsis  reverse-ellipsis"><span className="result_label">{summary}</span></div>
-			<input type="text" ref={this.textInput} value={result} className="result_input" readOnly />
+			<input type="text" ref={this.textInput} value={isFinite(result) ? result : 'Can\'t devide by zero'} className="result_input" readOnly />
 		</div>);
 	}
 }
