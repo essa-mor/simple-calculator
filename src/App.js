@@ -84,7 +84,7 @@ class App extends Component {
 	render() {
 		const { displayedNumber, summary } = this.state;
 		return (
-			<div className="App">
+			<div className="App" onKeyDown={this.onKeyDown}>
 				<ResultPanel className="result" summary={summary} result={displayedNumber} />
 				<CalculatorButton value="Clear" onClick={this.onClearClick} className="clear_result" />
 				<CalculatorButton value="←" onClick={this.doBackspace} className="digit" />

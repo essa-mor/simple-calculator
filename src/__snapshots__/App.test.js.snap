@@ -3,6 +3,7 @@
 exports[`App test renders properly 1`] = `
 <div
   className="App"
+  onKeyDown={[Function]}
 >
   <div
     className="result"
